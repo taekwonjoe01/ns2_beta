@@ -1,5 +1,5 @@
 Script.Load("lua/RBTM/modules/GUIChangelog/new/GUIModChangelog.lua")
-
+kRBTMVersion = 1201906071 -- 1 year month day versionofday
 local function showchangelog()
     MainMenu_Open()
     local mm = GetGUIMainMenu and GetGUIMainMenu()
