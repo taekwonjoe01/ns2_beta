@@ -1,5 +1,5 @@
-# Rantology's Balance Changes
-**SteamWorks Mod ID**: *6902a269*
+# NS2 Beta Balance
+**SteamWorks Mod ID**: *6ba7131e*
 
 This mod contains various balance changes based on various ideas of the NS2 balance team.
 
@@ -7,7 +7,7 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 
 ## Latest Changes 
 
-### 8/6/2019
+### June 8th, 2019
 
 - Fixed that the Flame damage type (Cyst & Clog) changes weren't loaded
 - Shotgun
