@@ -1,7 +1,7 @@
 class 'GUIModChangelog' (Window)
 
 local kTextureName = "*changelog_webpage_render"
-GUIModChangelog.URL = "https://ghoulofgsg9.github.io/Rants-Balance-Changes/"
+GUIModChangelog.URL = "https://taekwonjoe01.github.io/ns2_beta/"
 GUIModChangelog.titleText = "NS2 Beta Balance"
 
 function GUIModChangelog:Initialize()
