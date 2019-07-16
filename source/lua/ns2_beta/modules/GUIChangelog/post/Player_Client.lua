@@ -1,4 +1,4 @@
-Script.Load("lua/RBTM/modules/GUIChangelog/new/GUIModChangelog.lua")
+Script.Load("lua/ns2_beta/modules/GUIChangelog/new/GUIModChangelog.lua")
 
 kBetaModVersionKey = "betamod_version"
 
