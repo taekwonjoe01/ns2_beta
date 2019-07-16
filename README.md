@@ -1,5 +1,5 @@
 # NS2 Beta Balance
-**SteamWorks Mod ID**: *TBD*
+**SteamWorks Mod ID**: *6ba7131e*
 
 This mod contains various balance changes based on various ideas of the NS2 balance team.
 
