@@ -18,9 +18,7 @@ class 'Blink' (Ability)
 Blink.kMapName = "blink"
 
 -- initial force added when starting blink
-local kEtherealForce = 15
--- always add a little above top speed
-local kBlinkAddForce = 2
+local kEtherealForce = 17
 local kEtherealVerticalForce = 2
 
 local networkVars =
@@ -134,34 +132,38 @@ function Blink:OnSecondaryAttackEnd(player)
     
 end
 
+--[[
+    Blink:SetEthereal
+
+
+--]]
 function Blink:SetEthereal(player, state)
 
     -- Enter or leave ethereal mode.
     if player.ethereal ~= state then
     
         if state then
-        
             player.etherealStartTime = Shared.GetTime()
             TriggerBlinkOutEffects(self, player)
 
             local celerityLevel = GetHasCelerityUpgrade(player) and player:GetSpurLevel() or 0
-            local oldSpeed = player:GetVelocity():GetLengthXZ()
-            local oldVelocity = player:GetVelocity()
-            oldVelocity.y = 0
-            local newSpeed = math.max(oldSpeed, kEtherealForce + celerityLevel * 0.5)
+            local oldVelocity = player:GetVelocity():GetLength()
 
-            local newVelocity = player:GetViewCoords().zAxis * (kEtherealForce + celerityLevel * 0.5) + oldVelocity
-            if newVelocity:GetLength() > newSpeed then
-                newVelocity:Scale(newSpeed / newVelocity:GetLength())
-            end
-            
+            local blinkSpeed = kEtherealForce + celerityLevel * 0.5
+            -- taperedVelocity is tracked so that if we're for some reason going faster than blink speed, we use that instead of
+            -- slowing the player down.
+            local taperedVelocity = math.max(oldVelocity, blinkSpeed)
+
+            local playerForwardAxis = player:GetViewCoords().zAxis
+            local newVelocityVector = playerForwardAxis * taperedVelocity
+
+
+            --Apply a minimum y directional speed of kEtherealVerticalForce if on the ground.
             if player:GetIsOnGround() then
-                newVelocity.y = math.max(newVelocity.y, kEtherealVerticalForce)
+                newVelocityVector.y = math.max(newVelocityVector.y, kEtherealVerticalForce)
             end
-            
-            newVelocity:Add(player:GetViewCoords().zAxis * kBlinkAddForce)
-            
-            player:SetVelocity(newVelocity)
+
+            player:SetVelocity(newVelocityVector)
             player.onGround = false
             player.jumping = true
             

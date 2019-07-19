@@ -335,6 +335,17 @@ function BuildTechData()
         },
 
         {
+            [kTechDataId] = kTechId.Consume,
+            [kTechDataDisplayName] = "CONSUME",
+            [kTechDataCostKey] = 0,
+            [kTechIDShowEnables] = false,
+            [kTechDataResearchTimeKey] = kConsumeTime,
+            [kTechDataHotkey] = Move.R,
+            [kTechDataTooltipInfo] = "CONSUME_TOOLTIP",
+            [kTechDataMenuPriority] = 2,
+        },
+
+        {
             [kTechDataId] = kTechId.Heal,
             [kTechDataDisplayName] = "HEAL",
             [kTechDataOrderSound] = AlienCommander.kHealTarget,
@@ -1981,6 +1992,15 @@ function BuildTechData()
         },
 
         -- tier 1
+
+        {
+            [kTechDataId] = kTechId.Roost,
+            [kTechDataCategory] = kTechId.Lerk,
+            [kTechDataCostKey] = kRoostResearchCost,
+            [kTechDataResearchTimeKey] = kRoostResearchTime,
+            [kTechDataDisplayName] = "ROOST_ABILITY",
+            [kTechDataTooltipInfo] = "ROOST_TOOLTIP",
+        },
         {
             [kTechDataId] = kTechId.Umbra,
             [kTechDataCategory] = kTechId.Lerk,

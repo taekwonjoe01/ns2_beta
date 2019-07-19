@@ -33,6 +33,7 @@ Script.Load("lua/DetectableMixin.lua")
 Script.Load("lua/DamageMixin.lua")
 Script.Load("lua/DissolveMixin.lua")
 Script.Load("lua/MapBlipMixin.lua")
+Script.Load("lua/ResearchMixin.lua")
 Script.Load("lua/CombatMixin.lua")
 Script.Load("lua/CommanderGlowMixin.lua")
 Script.Load("lua/SupplyUserMixin.lua")
@@ -44,6 +45,7 @@ Script.Load("lua/CommAbilities/Alien/EnzymeCloud.lua")
 Script.Load("lua/CommAbilities/Alien/HallucinationCloud.lua")
 Script.Load("lua/CommAbilities/Alien/MucousMembrane.lua")
 Script.Load("lua/CommAbilities/Alien/StormCloud.lua")
+Script.Load("lua/ConsumeMixin.lua")
 
 class 'Drifter' (ScriptActor)
 
@@ -123,11 +125,13 @@ AddMixinNetworkVars(CloakableMixin, networkVars)
 AddMixinNetworkVars(LOSMixin, networkVars)
 AddMixinNetworkVars(DetectableMixin, networkVars)
 AddMixinNetworkVars(FireMixin, networkVars)
+AddMixinNetworkVars(ResearchMixin, networkVars)
 AddMixinNetworkVars(DissolveMixin, networkVars)
 AddMixinNetworkVars(CombatMixin, networkVars)
 AddMixinNetworkVars(SelectableMixin, networkVars)
 AddMixinNetworkVars(StormCloudMixin, networkVars)
 AddMixinNetworkVars(UmbraMixin, networkVars)
+AddMixinNetworkVars(ConsumeMixin, networkVars)
 
 function Drifter:OnCreate()
 
@@ -158,6 +162,8 @@ function Drifter:OnCreate()
     InitMixin(self, SoftTargetMixin)
     InitMixin(self, StormCloudMixin)
     InitMixin(self, UmbraMixin)
+    InitMixin(self, ConsumeMixin)
+    InitMixin(self, ResearchMixin)
 
     self:SetUpdates(true, kRealTimeUpdateRate)
     self:SetLagCompensated(true)
@@ -332,6 +338,21 @@ local function FindTask(self)
 
     end
 
+end
+
+function Drifter:OnConsumeTriggered()
+    local currentOrder = self:GetCurrentOrder()
+    if currentOrder ~= nil then
+        self:CompletedCurrentOrder()
+        self:ClearOrders()
+    end
+end
+
+function Drifter:OnOrderGiven(order)
+    --This will cancel Consume if it is running.
+    if self:GetIsConsuming() then
+        self:CancelResearch()
+    end
 end
 
 function Drifter:OnOverrideOrder(order)
@@ -567,7 +588,9 @@ local function UpdateTasks(self, deltaTime)
 
         if not self.timeLastTaskCheck or self.timeLastTaskCheck + 2 < Shared.GetTime() then
 
-            FindTask(self)
+            if GetIsUnitActive(self) then
+                FindTask(self)
+            end
             self.timeLastTaskCheck = Shared.GetTime()
 
         end
@@ -758,7 +781,7 @@ end
 function Drifter:GetTechButtons(techId)
 
     local techButtons = { kTechId.EnzymeCloud, kTechId.Hallucinate, kTechId.MucousMembrane, kTechId.SelectHallucinations,
-        kTechId.Grow, kTechId.Move, kTechId.Patrol, kTechId.FollowAlien }
+        kTechId.Grow, kTechId.Move, kTechId.Patrol, kTechId.Consume }
     --[[
         if self.hasCelerity then
             techButtons[6] = kTechId.DrifterCelerity

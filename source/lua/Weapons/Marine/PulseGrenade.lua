@@ -15,7 +15,7 @@ PrecacheAsset("cinematics/vfx_materials/elec_trails.surface_shader")
 PulseGrenade.kMapName = "pulsegrenadeprojectile"
 PulseGrenade.kModelName = PrecacheAsset("models/marine/grenades/gr_pulse_world.model")
 
-PulseGrenade.kDetonateRadius = 0.17
+PulseGrenade.kDetonateRadius = 1
 PulseGrenade.kClearOnImpact = true
 PulseGrenade.kClearOnEnemyImpact = true
 
@@ -130,7 +130,7 @@ if Server then
     
         PredictedProjectile.OnUpdate(self, deltaTime)
 
-        for _, enemy in ipairs( GetEntitiesForTeamWithinRange("Alien", GetEnemyTeamNumber(self:GetTeamNumber()), self:GetOrigin(), 1) ) do
+        for _, enemy in ipairs( GetEntitiesForTeamWithinRange("Alien", GetEnemyTeamNumber(self:GetTeamNumber()), self:GetOrigin(), kDetonateRadius) ) do
         
             if enemy:GetIsAlive() then
                 self:Detonate()

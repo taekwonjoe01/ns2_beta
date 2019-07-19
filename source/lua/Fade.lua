@@ -68,7 +68,8 @@ local kShadowStepForce = 4
 local kShadowStepSpeed = 30
 
 local kMaxSpeed = 6.2
-local kBlinkSpeed = 14
+local kBlinkMaxSpeed = 19
+local kBlinkSpeed = 17
 local kBlinkAcceleration = 40
 local kBlinkAddAcceleration = 1
 local kMetabolizeAnimationDelay = 0.65
@@ -313,7 +314,6 @@ function Fade:GetGroundFriction()
         local frac = timeSinceLastEthereal / Fade.kGroundFrictionPostBlinkDelay
         return Fade.kGroundFrictionPostBlink + (Fade.kGroundFrictionBase - Fade.kGroundFrictionPostBlink) * frac
     end
-
     return Fade.kGroundFrictionBase
 
 end
@@ -323,16 +323,7 @@ function Fade:GetAirControl()
 end
 
 function Fade:GetAirFriction()
-    if self:GetIsBlinking() then
-        return 0
-    end
-
-    return 0.17
-end
-
-
-function Fade:GetAirFriction()
-    return (self:GetIsBlinking() or self:GetRecentlyShadowStepped()) and 0 or (0.17  - (GetHasCelerityUpgrade(self) and self:GetSpurLevel() or 0) * 0.01)
+    return (self:GetIsBlinking() or self:GetRecentlyShadowStepped()) and 0 or 0.17
 end 
 
 function Fade:ModifyVelocity(input, velocity, deltaTime)
@@ -344,7 +335,7 @@ function Fade:ModifyVelocity(input, velocity, deltaTime)
         self:ModifyMaxSpeed(maxSpeedTable, input)  
         local prevSpeed = velocity:GetLength()
         local maxSpeed = math.max(prevSpeed, maxSpeedTable.maxSpeed)
-        local maxSpeed = math.min(25, maxSpeed)    
+        local maxSpeed = math.min(kBlinkMaxSpeed, maxSpeed)
         
         velocity:Add(wishDir * kBlinkAcceleration * deltaTime)
         
@@ -356,7 +347,7 @@ function Fade:ModifyVelocity(input, velocity, deltaTime)
         end 
         
         -- additional acceleration when holding down blink to exceed max speed
-        velocity:Add(wishDir * kBlinkAddAcceleration * deltaTime)
+        --velocity:Add(wishDir * kBlinkAddAcceleration * deltaTime)
         
     end
 

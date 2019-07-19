@@ -385,6 +385,8 @@ function Commander:GetCurrentTechButtons(techId, entity)
                 -- add recycle button if not researching / ghost structure mode
                 elseif HasMixin(entity, "Recycle") and not entity:GetIsResearching() and entity:GetCanRecycle() and not entity:GetIsRecycled() then
                     techButtons[kRecycleCancelButtonIndex] = kTechId.Recycle
+                elseif HasMixin(entity, "Consume") and not entity:GetIsConsuming() and entity:GetCanConsume() and not entity:GetIsConsumed() then
+                    techButtons[kRecycleCancelButtonIndex] = kTechId.Consume
                 end
             
             end

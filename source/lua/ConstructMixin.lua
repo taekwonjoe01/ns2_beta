@@ -430,7 +430,7 @@ function ConstructMixin:SetConstructionComplete(builder)
         AddBuildArmor(self, 1 - self.buildFraction)
         
         self.buildFraction = 1
-        
+
         if wasComplete ~= self.constructionComplete then
             self:OnConstructionComplete(builder)
         end

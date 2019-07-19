@@ -1971,7 +1971,8 @@ function Player:HandleButtons(input)
                                                                    Move.SelectNextWeapon, Move.SelectPrevWeapon, Move.Reload,
                                                                    Move.Taunt, Move.Weapon1, Move.Weapon2,
                                                                    Move.Weapon3, Move.Weapon4, Move.Weapon5, 
-                                                                   Move.Crouch, Move.Drop, Move.MovementModifier)))
+                                                                   Move.Crouch, Move.Drop, Move.MovementModifier,
+                                                                   Move.GrenadeQuickThrow, Move.QuickSwitch)))
                                                                    
         input.move.x = 0
         input.move.y = 0

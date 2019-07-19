@@ -14,7 +14,7 @@ kTechId = enum {
     'SpawnMarine', 'SpawnAlien', 'CollectResources', 'TransformResources', 'Research',
 
     -- General orders and actions ("Default" is right-click)
-    'Default', 'Move', 'Patrol', 'Attack', 'Build', 'Construct', 'AutoConstruct', 'Grow', 'Cancel', 'Recycle', 'Weld', 'AutoWeld', 'Stop', 'SetRally', 'SetTarget', 'Follow', 'HoldPosition', 'FollowAlien',
+    'Default', 'Move', 'Patrol', 'Attack', 'Build', 'Construct', 'AutoConstruct', 'Grow', 'Cancel', 'Recycle', 'Consume', 'Weld', 'AutoWeld', 'Stop', 'SetRally', 'SetTarget', 'Follow', 'HoldPosition', 'FollowAlien',
     -- special mac order (follows the target, welds the target as priority and others in range)
     'FollowAndWeld',
 
@@ -165,7 +165,7 @@ kTechId = enum {
     'Spit', 'Spray', 'BellySlide', 'BabblerTech', 'BuildAbility', 'BabblerAbility', 'Babbler', 'BabblerEgg', 'GorgeTunnelTech', 'BileBomb',  'WebTech', 'Web', 'HydraTech',
 
     -- lerk abilities
-    'LerkBite', 'Cling', 'Spikes', 'Umbra', 'Spores',
+    'LerkBite', 'Cling', 'Spikes', 'Umbra', 'Spores', 'Roost',
 
     -- fade abilities
     'Swipe', 'Blink', 'ShadowStep', 'Vortex', 'Stab', 'MetabolizeEnergy', 'MetabolizeHealth',

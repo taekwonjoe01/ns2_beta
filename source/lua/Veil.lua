@@ -36,6 +36,7 @@ Script.Load("lua/MapBlipMixin.lua")
 Script.Load("lua/CombatMixin.lua")
 Script.Load("lua/CommanderGlowMixin.lua")
 Script.Load("lua/BiomassMixin.lua")
+Script.Load("lua/ConsumeMixin.lua")
 
 class 'Veil' (ScriptActor)
 
@@ -66,6 +67,7 @@ AddMixinNetworkVars(FireMixin, networkVars)
 AddMixinNetworkVars(MaturityMixin, networkVars)
 AddMixinNetworkVars(CombatMixin, networkVars)
 AddMixinNetworkVars(SelectableMixin, networkVars)
+AddMixinNetworkVars(ConsumeMixin, networkVars)
 
 function Veil:OnCreate()
 
@@ -94,6 +96,7 @@ function Veil:OnCreate()
     InitMixin(self, MaturityMixin)
     InitMixin(self, CombatMixin)
     InitMixin(self, BiomassMixin)
+    InitMixin(self, ConsumeMixin)
     
     if Server then
         InitMixin(self, InfestationTrackerMixin)
@@ -199,6 +202,15 @@ function Veil:OverrideHintString(hintString)
     
     return hintString
     
+end
+
+function Veil:GetTechButtons(techId)
+
+    local techButtons = { kTechId.None, kTechId.None, kTechId.None, kTechId.None,
+                          kTechId.None, kTechId.None, kTechId.None, kTechId.Consume }
+
+    return techButtons
+
 end
 
 Shared.LinkClassToMap("Veil", Veil.kMapName, networkVars)

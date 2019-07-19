@@ -417,11 +417,13 @@ kUmbraMaxRange = 17
 kUmbraDuration = 2.5
 kUmbraRadius = 4
 
-kUmbraShotgunModifier = 0.8
-kUmbraBulletModifier = 0.8
-kUmbraMinigunModifier = 0.8
-kUmbraRailgunModifier = 0.8
-kUmbraGrenadeModifier = 0.8
+
+kUmbraDefaultModifier = 0.80
+kUmbraShotgunModifier = kUmbraDefaultModifier
+kUmbraBulletModifier = kUmbraDefaultModifier
+kUmbraMinigunModifier = kUmbraDefaultModifier
+kUmbraRailgunModifier = kUmbraDefaultModifier
+kUmbraGrenadeModifier = kUmbraDefaultModifier
 
 kSpikeSpread = Math.Radians(3.6)
 kSpikeSize = 0.045
@@ -508,6 +510,7 @@ kUpgradeLevelDelayAtAlienRepawn = 4
 
 -- BUILD/RESEARCH TIMES
 kRecycleTime = 12
+kConsumeTime = kRecycleTime
 kArmoryBuildTime = 12
 kAdvancedArmoryResearchTime = 90
 kWeaponsModuleAddonTime = 40
@@ -639,6 +642,8 @@ kBileBombResearchCost = 15
 kBileBombResearchTime = 40
 kShadowStepResearchCost = 15
 kShadowStepResearchTime = 40
+kRoostResearchCost = 10
+kRoostResearchTime = 30
 kUmbraResearchCost = 20
 kUmbraResearchTime = 45
 kBoneShieldResearchCost = 20
