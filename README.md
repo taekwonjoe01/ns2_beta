@@ -5,9 +5,35 @@ This mod contains various balance changes based on various ideas of the NS2 bala
 
 Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 
-## Latest Changes 
+## Latest Changes (Revision 2)
 
-## Revision 1
+- Fade
+    - Blink's initial cast (when you first activate ability) will now cancel All velocity across all axis' (used to only cancel Up/Down velocity)
+    - Blink initial cast speed set to 17 (up from ~15.6)
+    - Removed spurs reducing Air friction for fade. Originally this reduced 0.01 air friction per spur. Fade air friction is 0.17.
+
+- Lerk
+    - New Ability: Roost. When a lerk is perched on a wall, they will heal 5HP per second.
+        - Roost costs 10 Team resources to research
+        - Roost unlocked at biomass 2
+        - Research takes 30 seconds
+        
+- Alien Commander
+    - New Ability: Consume. Allows a Khammander to recycle alien structures and return the supply cost. Structures do not return team resources. 
+        - Ability is cancelled if orders are given to units that are being consumed.
+        - Consume ability cancels any existing orders for the unit.
+
+- Marines
+    - New Ability: Grenade Quick Throw. Default button "B" will instantly and quickly throw any grenades the marine has purchased. 
+        - Can rebind the button in menu options.
+    - Tweaked Shotgun:
+        - Damage falloff added. Fall off starts at 6m. Damage of each pellet scales from 100% to 75% between 6m and 12m. After 12 meters, damage is always 75%.
+        - Change the spread pattern to 13 (1/5/7) pellets total with variable calibers and damage values:
+            - 1 pellet in the very center causing 20 dmg and a caliber of 16 mm
+            - 5 pellets with a center offset of 0.5 (inner ring) dealing 16 dmg and and a caliber of 16 mm
+            - 7 pellets with a center offset of 1.5 (outer ring) dealing 10 dmg and and a caliber of 150 mm
+
+## All Changes (Compared to Vanilla Build 328)
 - Alien
     - Upgrades
         - Camouflage
@@ -26,8 +52,14 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
             - Now requires biomass 6 (up from 5)
             - Decreased damage reduction to 20% (from 25%)
             - Decreased umbra cloud life time to 2.5 seconds (from 4)
+        - New Ability: Roost. When a lerk is perched on a wall, they will heal 5HP per second.
+            - Roost costs 10 Team resources to research
+            - Roost unlocked at biomass 2
+            - Research takes 30 seconds
     - Fade
-        - Increased initial blink boost to 15 m/s (from 13.5)
+        - Blink's initial cast (when you first activate ability) will now cancel All velocity across all axis' (used to only cancel Up/Down velocity)
+        - Blink initial cast speed set to 17 (up from ~15.6)
+        - Removed spurs reducing Air friction for fade. Originally this reduced 0.01 air friction per spur. Fade air friction is 0.17.
     - Onos
         - Decreased base health to 700 (from 900)
         - Increased biomass health bonus to 50 (from 30)
@@ -37,9 +69,11 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
         - Receive 7x direct damage from welders, flame throwers and cluster grenades (up from 2.5x)
     
 - Marine
+    - New Ability: Grenade Quick Throw. Default button "B" will instantly and quickly throw any grenades the marine has purchased. 
+        - Can rebind the button in menu options.
     - Grenades
         - Cluster
-            - Now deals 5x damage vs. flammable structures, 2.5x vs. all other structures. Deals 50% damage to players.
+            - Now deals 5x damage vs. flammable structures, 2.5x vs. all other structures.
             - Now sets targets on fire
             - Burns away umbra, spores and bile bombs
         - Nerve Gas
@@ -51,12 +85,11 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
     - Machine Gun
         - Decreased player target damage to 12/13/14/15 from 12/13.2/14.4/15.6
     - Shotgun 
-        - Removed damage falloff
+        - Damage falloff added. Fall off starts at 6m. Damage of each pellet scales from 100% to 75% between 6m and 12m. After 12 meters, damage is always 75%.
         - Change the spread pattern to 13 (1/5/7) pellets total with variable calibers and damage values:
-            - 1 pellet in the very center causing 15 dmg and a caliber of 16 mm
-            - 5 pellets with a center offset of 0.6 (inner ring) dealing 17 dmg and and a caliber of 16 mm
-            - 7 pellets with a center offset of 1.6 (outer ring) dealing 17 dmg and and a caliber of 150 mm
-        ![shotgun spread pattern comparision](https://trello-attachments.s3.amazonaws.com/5b4e23748739c1333f6dc499/5cd2cd183bd6e121e8b32aac/5a018569713d8a1f3014a67a516b44f9/327_SG_ranto.png)
+            - 1 pellet in the very center causing 20 dmg and a caliber of 16 mm
+            - 5 pellets with a center offset of 0.5 (inner ring) dealing 16 dmg and and a caliber of 16 mm
+            - 7 pellets with a center offset of 1.5 (outer ring) dealing 10 dmg and and a caliber of 150 mm
     - Mines
         - Damage type changed to Normal (from Light)
         - Damage increased to 150 (from 125)
@@ -66,7 +99,6 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
         - Now use the same snap radius as the med pack
     - Nano shield
         - Decreased snap radius to 3 m from 6
-        
     - ARC
         - Damage reduced to 530 (from 630)
         - Changed hp to 2600/400 fromm 3000/200 (shifting more hp to armor)
