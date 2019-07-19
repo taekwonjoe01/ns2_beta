@@ -38,6 +38,8 @@ local kGrenadeVelocity = 18
 local networkVars =
 {
     grenadesLeft = "integer (0 to ".. kMaxHandGrenades ..")",
+    pullPinOnDeploy = "private boolean",
+    throwASAP = "private boolean"
 }
 
 local function DropGrenade(self, player)
@@ -79,6 +81,8 @@ function GrenadeThrower:OnCreate()
 
     self.pinPulled = false
     self.grenadesLeft = kMaxHandGrenades
+    self.pullPinOnDeploy = false
+    self.throwASAP = false
 
     self:SetModel(self:GetThirdPersonModelName())
 
@@ -112,6 +116,14 @@ function GrenadeThrower:OnPrimaryAttack(_)
 
 end
 
+function GrenadeThrower:SetPullPinOnDeploy()
+    self.pullPinOnDeploy = true
+end
+
+function GrenadeThrower:SetThrowASAP()
+    self.throwASAP = true
+end
+
 function GrenadeThrower:OnPrimaryAttackEnd(_)
     self.primaryAttacking = false
 end
@@ -119,19 +131,32 @@ end
 function GrenadeThrower:OnHolster()
     Weapon.OnHolster(self)
     self.pinPulled = false
+    self.pullPinOnDeploy = false
+    self.throwASAP = false
 end
 
 function GrenadeThrower:OnTag(tagName)
 
     local player = self:GetParent()
 
-    if tagName == "pinpull_start" then
+    if tagName == "deploy_end" then
 
+        if (self.pullPinOnDeploy) then
+            player:PrimaryAttack()
+        end
+
+    elseif tagName == "pinpull_start" then
+
+        -- TODO(Simba) This currently is never being triggered - not sure if a problem.
         self:TriggerEffects("grenade_pull_pin")
 
     elseif tagName == "pinpull_end" then
 
         self.pinPulled = true
+
+        if (self.throwASAP) then
+            player:PrimaryAttackEnd()
+        end
 
     elseif tagName == "throw" then
 

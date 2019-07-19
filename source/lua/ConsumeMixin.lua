@@ -64,7 +64,8 @@ function ConsumeMixin:OnResearchComplete(researchId)
             return
         end
 
-        self:TriggerEffects("recycle_end")
+        -- TODO need effects?
+        --self:TriggerEffects("recycle_end")
         Server.SendNetworkMessage( "Consume", { techId = self:GetTechId() }, true )
         
         local team = self:GetTeam()
@@ -99,7 +100,8 @@ end
 function ConsumeMixin:OnResearch(researchId)
 
     if researchId == kTechId.Consume then
-        self:TriggerEffects("recycle_start")
+        -- TODO need effects?
+        --self:TriggerEffects("recycle_start")
 
         if self.OnConsumeTriggered then
             self:OnConsumeTriggered()
