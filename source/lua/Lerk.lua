@@ -204,12 +204,13 @@ function Lerk:UpdateRoostHeal()
             if roostAllowed then
                 local healAmount = self:AddHealth(self.kRoostHealAmount, false, false)
 
-                if Client and healAmount > 0 then
-                    local GUIRegenerationFeedback = ClientUI.GetScript("GUIRegenerationFeedback")
-                    GUIRegenerationFeedback:TriggerRegenEffect()
-                    local cinematic = Client.CreateCinematic(RenderScene.Zone_ViewModel)
-                    cinematic:SetCinematic(kRegenerationViewCinematic)
-                end
+                -- TODO want heal sounds?
+                --if Client and healAmount > 0 then
+                --    local GUIRegenerationFeedback = ClientUI.GetScript("GUIRegenerationFeedback")
+                --    GUIRegenerationFeedback:TriggerRegenEffect()
+                --    local cinematic = Client.CreateCinematic(RenderScene.Zone_ViewModel)
+                --    cinematic:SetCinematic(kRegenerationViewCinematic)
+                --end
 
                 self.lastTimeRoost = Shared.GetTime()
             end

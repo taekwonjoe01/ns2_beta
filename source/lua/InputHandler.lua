@@ -427,7 +427,7 @@ local function GenerateMove()
         if _keyPressed[ _keyBinding.Weapon5 ] then
             move.commands = bit.bor(move.commands, Move.Weapon5)
         end
-        if _keyPressed[ _keyBinding.GrenadeQuickThrow ] then
+        if _keyState[ _keyBinding.GrenadeQuickThrow ] then
             move.commands = bit.bor(move.commands, Move.GrenadeQuickThrow)
         end
         if _keyPressed[ _keyBinding.QuickSwitch ] then

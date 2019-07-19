@@ -15,7 +15,7 @@ PrecacheAsset("cinematics/vfx_materials/elec_trails.surface_shader")
 PulseGrenade.kMapName = "pulsegrenadeprojectile"
 PulseGrenade.kModelName = PrecacheAsset("models/marine/grenades/gr_pulse_world.model")
 
-PulseGrenade.kDetonateRadius = 1
+PulseGrenade.kDetonateRadius = 0.17
 PulseGrenade.kClearOnImpact = true
 PulseGrenade.kClearOnEnemyImpact = true
 
@@ -34,17 +34,17 @@ AddMixinNetworkVars(TeamMixin, networkVars)
 function PulseGrenade:OnCreate()
 
     PredictedProjectile.OnCreate(self)
-    
+
     InitMixin(self, BaseModelMixin)
     InitMixin(self, ModelMixin)
     InitMixin(self, DamageMixin)
 
     if Server then
-    
+
         self:AddTimedCallback(PulseGrenade.TimedDetonateCallback, kLifeTime)
-        
+
     end
-    
+
 end
 
 function PulseGrenade:ProcessHit(targetHit)
@@ -69,45 +69,45 @@ end
 local function EnergyDamage(hitEntities, origin, radius, damage)
 
     for _, entity in ipairs(hitEntities) do
-    
+
         if entity.GetEnergy and entity.SetEnergy then
-        
+
             local targetPoint = HasMixin(entity, "Target") and entity:GetEngagementPoint() or entity:GetOrigin()
             local energyToDrain = damage *  (1 - Clamp( (targetPoint - origin):GetLength() / radius, 0, 1))
             entity:SetEnergy(entity:GetEnergy() - energyToDrain)
-        
+
         end
-    
+
         if entity.SetElectrified then
             entity:SetElectrified(kElectrifiedDuration)
         end
-    
+
     end
 
 end
 
 if Server then
-    
+
     function PulseGrenade:TimedDetonateCallback()
         self:Detonate()
     end
-    
+
     function PulseGrenade:Detonate(targetHit)
 
         local hitEntities = GetEntitiesWithMixinWithinRange("Live", self:GetOrigin(), kPulseGrenadeEnergyDamageRadius)
         table.removevalue(hitEntities, self)
 
         if targetHit then
-        
+
             table.removevalue(hitEntities, targetHit)
             self:DoDamage(kPulseGrenadeDamage, targetHit, targetHit:GetOrigin(), GetNormalizedVector(targetHit:GetOrigin() - self:GetOrigin()), "none")
 
                 if targetHit.SetElectrified then
                     targetHit:SetElectrified(kElectrifiedDuration)
                 end
-            
+
         end
-        
+
         RadiusDamage(hitEntities, self:GetOrigin(), kPulseGrenadeDamageRadius, kPulseGrenadeDamage, self)
         EnergyDamage(hitEntities, self:GetOrigin(), kPulseGrenadeEnergyDamageRadius, kPulseGrenadeEnergyDamage)
 
@@ -117,20 +117,20 @@ if Server then
         if not targetHit then
             params[kEffectHostCoords] = Coords.GetLookIn( self:GetOrigin(), self:GetCoords().zAxis)
         end
-        
-        self:TriggerEffects("pulse_grenade_explode", params)    
+
+        self:TriggerEffects("pulse_grenade_explode", params)
         CreateExplosionDecals(self)
         TriggerCameraShake(self, kGrenadeMinShakeIntensity, kGrenadeMaxShakeIntensity, kGrenadeCameraShakeDistance)
-     
+
         DestroyEntity(self)
 
     end
 
     function PulseGrenade:OnUpdate(deltaTime)
-    
+
         PredictedProjectile.OnUpdate(self, deltaTime)
 
-        for _, enemy in ipairs( GetEntitiesForTeamWithinRange("Alien", GetEnemyTeamNumber(self:GetTeamNumber()), self:GetOrigin(), kDetonateRadius) ) do
+        for _, enemy in ipairs( GetEntitiesForTeamWithinRange("Alien", GetEnemyTeamNumber(self:GetTeamNumber()), self:GetOrigin(), PulseGrenade.kDetonateRadius) ) do
         
             if enemy:GetIsAlive() then
                 self:Detonate()
