@@ -36,6 +36,16 @@ function OnCommandRecycle(recycleTable)
 
 end
 
+function OnCommandConsume(consumeTable)
+
+    if consumeTable.techId == kTechId.Harvester then
+        DeathMsgUI_AddRtsLost(kTeam2Index, 1)
+    end
+
+end
+
+Client.HookNetworkMessage("Consume", OnCommandConsume)
+
 Client.HookNetworkMessage("Recycle", OnCommandRecycle)
 
 

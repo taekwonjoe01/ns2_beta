@@ -51,6 +51,7 @@ Script.Load("lua/SupplyUserMixin.lua")
 Script.Load("lua/BiomassMixin.lua")
 Script.Load("lua/OrdersMixin.lua")
 Script.Load("lua/IdleMixin.lua")
+Script.Load("lua/ConsumeMixin.lua")
 
 class 'Crag' (ScriptActor)
 
@@ -111,6 +112,7 @@ AddMixinNetworkVars(CombatMixin, networkVars)
 AddMixinNetworkVars(SelectableMixin, networkVars)
 AddMixinNetworkVars(OrdersMixin, networkVars)
 AddMixinNetworkVars(IdleMixin, networkVars)
+AddMixinNetworkVars(ConsumeMixin, networkVars)
 
 function Crag:OnCreate()
 
@@ -143,6 +145,7 @@ function Crag:OnCreate()
     InitMixin(self, PathingMixin)
     InitMixin(self, BiomassMixin)
     InitMixin(self, OrdersMixin, { kMoveOrderCompleteDistance = kAIMoveOrderCompleteDistance })
+    InitMixin(self, ConsumeMixin)
     
     self.healingActive = false
     self.healWaveActive = false
@@ -295,6 +298,14 @@ function Crag:UpdateHealing()
     
 end
 
+function Crag:OnConsumeTriggered()
+    local currentOrder = self:GetCurrentOrder()
+    if currentOrder ~= nil then
+        self:CompletedCurrentOrder()
+        self:ClearOrders()
+    end
+end
+
 function Crag:GetMaxSpeed()
     return Crag.kMaxSpeed
 end
@@ -303,6 +314,12 @@ function Crag:OnOrderChanged()
     local currentOrder = self:GetCurrentOrder()
     if GetIsUnitActive(self) and currentOrder and currentOrder:GetType() == kTechId.Move then
         self:SetUpdateRate(kRealTimeUpdateRate)
+    end
+end
+
+function Crag:OnOrderGiven(order)
+    if self:GetIsConsuming() then
+        self:CancelResearch()
     end
 end
 
@@ -360,7 +377,7 @@ end
 function Crag:GetTechButtons(techId)
 
     local techButtons = { kTechId.HealWave, kTechId.Move, kTechId.CragHeal, kTechId.None,
-                          kTechId.None, kTechId.None, kTechId.None, kTechId.None }
+                          kTechId.None, kTechId.None, kTechId.None, kTechId.Consume }
     
     if self.moving then
         techButtons[2] = kTechId.Stop

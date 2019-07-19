@@ -440,7 +440,7 @@ local function QuintupleForStructure(target, _, _, damage, armorFractionUsed, he
 end
 
 local kClusterStructuralDamageScalar = 2.5
-local kClusterPlayerDamageScalar = 0.5
+local kClusterPlayerDamageScalar = 1.0
 local function ClusterFlameModifier(target, _, _, damage, armorFractionUsed, healthPerArmor, damageType)
     if target:isa("Player") then
         damage = damage * kClusterPlayerDamageScalar

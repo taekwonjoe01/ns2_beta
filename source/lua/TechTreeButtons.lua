@@ -271,6 +271,7 @@ kTechIdToMaterialOffset[kTechId.BoneShield] = 156
 kTechIdToMaterialOffset[kTechId.MACSpeedTech] = 73
 kTechIdToMaterialOffset[kTechId.Detector] = 74  
 kTechIdToMaterialOffset[kTechId.Umbra] = 75
+kTechIdToMaterialOffset[kTechId.Roost] = 166
 kTechIdToMaterialOffset[kTechId.ShadeCloak] = 76
 kTechIdToMaterialOffset[kTechId.Armor1] = 77
 kTechIdToMaterialOffset[kTechId.Armor2] = 78
@@ -318,6 +319,7 @@ kTechIdToMaterialOffset[kTechId.AdvancedArmoryUpgrade] = 99
 
 kTechIdToMaterialOffset[kTechId.Spikes] = 106
 kTechIdToMaterialOffset[kTechId.Recycle] = 108
+kTechIdToMaterialOffset[kTechId.Consume] = 108
 kTechIdToMaterialOffset[kTechId.Storm] = 113
 kTechIdToMaterialOffset[kTechId.Patrol] = 120
 kTechIdToMaterialOffset[kTechId.Move] = 117

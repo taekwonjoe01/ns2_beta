@@ -1,4 +1,8 @@
 -- Commands
+-- These are keys that the game can support being pressed at the same time
+-- When altering these, please remember to update the Player.lua HandleButtons method and update things that shouldn't be
+-- allowed when player cannot control themselves.
+
 Move.PrimaryAttack          = bit.lshift(1, 0)
 Move.SecondaryAttack        = bit.lshift(1, 1)
 Move.SelectNextWeapon       = bit.lshift(1, 2)
@@ -18,21 +22,23 @@ Move.Weapon4                = bit.lshift(1, 15)
 Move.Weapon5                = bit.lshift(1, 16)
 Move.Drop                   = bit.lshift(1, 17)
 Move.Taunt                  = bit.lshift(1, 18)
-Move.Scoreboard             = bit.lshift(1, 19)
+Move.GrenadeQuickThrow      = bit.lshift(1, 19) -- This should probably be renamed to something more generic so aliens or commanders can find a use.
+--Move.Scoreboard             = bit.lshift(1, 19) -- should go (not used)
 Move.Exit                   = bit.lshift(1, 20)
 Move.ScrollForward          = bit.lshift(1, 21)
 Move.ScrollLeft             = bit.lshift(1, 22)
 Move.ScrollRight            = bit.lshift(1, 23)
 Move.ScrollBackward         = bit.lshift(1, 24)
-Move.ToggleRequest          = bit.lshift(1, 25)
-Move.ToggleSayings          = bit.lshift(1, 26)
-Move.Eject                  = bit.lshift(1, 27)
-Move.TextChat               = bit.lshift(1, 28)
-Move.TeamChat               = bit.lshift(1, 29)
+--Move.ToggleRequest          = bit.lshift(1, 25) -- should go (not used)
+--Move.ToggleSayings          = bit.lshift(1, 26) -- should go (not used)
+--Move.Eject                  = bit.lshift(1, 27) -- should go (not used)
+--Move.TextChat               = bit.lshift(1, 28) -- should go (not used)
+--Move.TeamChat               = bit.lshift(1, 29) -- should go (not used)
 Move.QuickSwitch            = bit.lshift(1, 30)
-Move.ReadyRoom              = bit.lshift(1, 31)
+--Move.ReadyRoom              = bit.lshift(1, 31) -- should go (not used)
 
 -- Hotkeys
+-- Only one of these will make it to the game, and it's the last one checked by the InputHandler. These can be used
 Move.None                = 0 
 Move.Q                   = 1                
 Move.W                   = 2

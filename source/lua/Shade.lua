@@ -60,6 +60,7 @@ Script.Load("lua/SupplyUserMixin.lua")
 Script.Load("lua/BiomassMixin.lua")
 Script.Load("lua/OrdersMixin.lua")
 Script.Load("lua/IdleMixin.lua")
+Script.Load("lua/ConsumeMixin.lua")
 
 class 'Shade' (ScriptActor)
 
@@ -104,7 +105,8 @@ AddMixinNetworkVars(CombatMixin, networkVars)
 AddMixinNetworkVars(SelectableMixin, networkVars)
 AddMixinNetworkVars(OrdersMixin, networkVars)
 AddMixinNetworkVars(IdleMixin, networkVars)
-        
+AddMixinNetworkVars(ConsumeMixin, networkVars)
+
 function Shade:OnCreate()
 
     ScriptActor.OnCreate(self)
@@ -136,6 +138,7 @@ function Shade:OnCreate()
     InitMixin(self, CombatMixin)
     InitMixin(self, PathingMixin)
     InitMixin(self, BiomassMixin)
+    InitMixin(self, ConsumeMixin)
     InitMixin(self, OrdersMixin, { kMoveOrderCompleteDistance = kAIMoveOrderCompleteDistance })
     
     if Server then
@@ -215,14 +218,29 @@ end
 function Shade:GetTechButtons(techId)
 
     local techButtons = { kTechId.ShadeInk, kTechId.Move, kTechId.ShadeCloak, kTechId.None, 
-                          kTechId.None, kTechId.None, kTechId.None, kTechId.None }
+                          kTechId.None, kTechId.None, kTechId.None, kTechId.Consume }
                           
     if self.moving then
         techButtons[2] = kTechId.Stop
-    end                      
+    end
 
     return techButtons
     
+end
+
+function Shade:OnConsumeTriggered()
+    local currentOrder = self:GetCurrentOrder()
+    if currentOrder ~= nil then
+        self:CompletedCurrentOrder()
+        self:ClearOrders()
+    end
+end
+
+function Shade:OnOrderGiven(order)
+    --This will cancel Consume if it is running.
+    if self:GetIsConsuming() then
+        self:CancelResearch()
+    end
 end
 
 function Shade:PerformAction(techNode)
@@ -289,7 +307,7 @@ end
 
 if Server then
 
-    function Shade:OnConstructionComplete()    
+    function Shade:OnConstructionComplete()
         self:AddTimedCallback(Shade.UpdateCloaking, Shade.kCloakUpdateRate)    
     end
     

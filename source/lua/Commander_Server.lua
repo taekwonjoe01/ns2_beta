@@ -275,7 +275,7 @@ function Commander:ProcessTechTreeActionForEntity(techNode, position, normal, is
             elseif(techNode:GetIsPlasmaManufacture()) then
                 success = self:AttemptToResearchOrUpgrade(techNode, entity)
             end
-            
+
             if(success and cost ~= nil) then
             
                 self:AddResources(-cost)

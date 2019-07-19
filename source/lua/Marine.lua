@@ -153,7 +153,8 @@ local networkVars =
     
     timeLastBeacon = "private time",
     
-    weaponBeforeUseId = "private compensated entityid"
+    weaponBeforeUseId = "private compensated entityid",
+    quickGrenadeThrowLastFrame = "private boolean"
 }
 
 AddMixinNetworkVars(OrdersMixin, networkVars)
@@ -252,6 +253,7 @@ function Marine:OnCreate()
 
     self.flashlightLastFrame = false
     self.weaponBeforeUseId = Entity.invalidId
+    self.quickGrenadeThrowLastFrame = false
 
 end
 
@@ -554,6 +556,77 @@ function Marine:HandleButtons(input)
                 if pickupWeapon then
                     PickupWeapon(self, pickupWeapon, false)
                 end
+            end
+        end
+    end
+end
+
+function Marine:HandleAttacks(input)
+
+    Player.HandleAttacks(self, input)
+
+    if not self:GetIsCommander() and not self:GetIsUsing() then
+        if not self:GetCanAttack() then
+            input.commands = bit.band(input.commands, bit.bnot(Move.GrenadeQuickThrow))
+        end
+
+        if bit.band(input.commands, Move.GrenadeQuickThrow) ~= 0 then
+            if not self.quickGrenadeThrowLastFrame then
+                self:QuickThrowGrenade(input)
+            end
+
+            self.quickGrenadeThrowLastFrame = true
+        else
+            self.quickGrenadeThrowLastFrame = false
+        end
+    end
+
+end
+
+local NO_GRENADE = 0
+local CLUSTER_GRENADE = 1
+local GAS_GRENADE = 2
+local PULSE_GRENADE = 3
+
+local function GetGrenadeType(grenade)
+    if grenade:isa("ClusterGrenadeThrower") then return CLUSTER_GRENADE end
+    if grenade:isa("GasGrenadeThrower") then return GAS_GRENADE end
+    if grenade:isa("PulseGrenadeThrower") then return PULSE_GRENADE end
+
+    return NO_GRENADE
+end
+
+local function FindGrenadeType(inventory)
+    for _,v in ipairs(inventory) do
+        local type = GetGrenadeType(v)
+
+        if type ~= NO_GRENADE then
+            return type
+        end
+    end
+
+    return NO_GRENADE
+end
+
+function Marine:QuickThrowGrenade()
+    Log("QuickThrowGrenade")
+    local weapons = self.GetWeapons and self:GetWeapons() or 0
+    local grenadeType = weapons and FindGrenadeType(weapons)
+    local validMarine = (self:isa("Marine") or self:isa("JetpackMarine"))
+    local throwValid = grenadeType and grenadeType ~= NO_GRENADE and validMarine
+
+    if throwValid then
+        for _,weapon in ipairs(weapons) do
+
+            if weapon and GetGrenadeType(weapon) ~= NO_GRENADE then
+
+                weapon:OnPrimaryAttack(self)
+                self:OnPrimaryAttack()
+
+                weapon:OnTag("throw")
+                weapon:OnTag("attack_end")
+
+                break
             end
         end
     end

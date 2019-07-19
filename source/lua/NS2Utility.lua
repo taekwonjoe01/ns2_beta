@@ -431,6 +431,7 @@ function GetIsUnitActive(unit, debug)
     local alive = not HasMixin(unit, "Live") or unit:GetIsAlive()
     local isBuilt = not HasMixin(unit, "Construct") or unit:GetIsBuilt()
     local isRecycled = HasMixin(unit, "Recycle") and (unit:GetIsRecycled() or unit:GetIsRecycling())
+    local isConsumed = HasMixin(unit, "Consume") and (unit:GetIsConsumed() or unit:GetIsConsuming())
 
     if debug then
         Print("------------ GetIsUnitActive(%s) -----------------", ToString(unit))
@@ -438,10 +439,11 @@ function GetIsUnitActive(unit, debug)
         Print("alive: %s", ToString(alive))
         Print("isBuilt: %s", ToString(isBuilt))
         Print("isRecycled: %s", ToString(isRecycled))
+        Print("isConsumed: %s", ToString(isConsumed))
         Print("-----------------------------")
     end
 
-    return powered and alive and isBuilt and not isRecycled
+    return powered and alive and isBuilt and not isRecycled and not isConsumed
 
 end
 
