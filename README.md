@@ -35,6 +35,9 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 
 ## All Changes (Compared to Vanilla Build 328)
 - Alien
+    - Khammander
+        - New Ability: Grenade Quick Throw. Default button "B" will instantly and quickly throw any grenades the marine has purchased. 
+            - Can rebind the button in menu options.
     - Upgrades
         - Camouflage
             - Now de-cloaks completely at max speed
