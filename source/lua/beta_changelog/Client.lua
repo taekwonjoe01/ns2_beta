@@ -1,6 +1,7 @@
-Script.Load("lua/ns2_beta/modules/GUIChangelog/new/GUIModChangelog.lua")
+Script.Load("lua/beta_changelog/GUIModChangelog.lua")
 
 kBetaModVersionKey = "betamod_version"
+kBetaVersion = 2
 
 local function showChangeLog()
     MainMenu_Open()

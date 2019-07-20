@@ -1,0 +1,5 @@
+modEntry =
+{
+    Client = "lua/beta_changelog/Client.lua",
+    Priority = 10,
+}
