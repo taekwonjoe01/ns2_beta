@@ -24,8 +24,9 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
         - Consume ability cancels any existing orders for the unit.
 
 - Marines
-    - New Ability: Grenade Quick Throw. Default button "B" will instantly and quickly throw any grenades the marine has purchased. 
+    - New Ability: Dedicated Grenade Throw (soon will become "quick throw"). Default button "B" will instantly deploy and throw any grenades the marine has purchased. 
         - Can rebind the button in menu options.
+        - Button can be held to hold the cooked grenade.
     - Tweaked Shotgun:
         - Damage falloff added. Fall off starts at 6m. Damage of each pellet scales from 100% to 75% between 6m and 12m. After 12 meters, damage is always 75%.
         - Change the spread pattern to 13 (1/5/7) pellets total with variable calibers and damage values:
@@ -36,8 +37,9 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 ## All Changes (Compared to Vanilla Build 328)
 - Alien
     - Khammander
-        - New Ability: Grenade Quick Throw. Default button "B" will instantly and quickly throw any grenades the marine has purchased. 
-            - Can rebind the button in menu options.
+        - New Ability: Consume. Allows a Khammander to recycle alien structures and return the supply cost. Structures do not return team resources. 
+            - Ability is cancelled if orders are given to units that are being consumed.
+            - Consume ability cancels any existing orders for the unit.
     - Upgrades
         - Camouflage
             - Now de-cloaks completely at max speed
@@ -72,8 +74,9 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
         - Receive 7x direct damage from welders, flame throwers and cluster grenades (up from 2.5x)
     
 - Marine
-    - New Ability: Grenade Quick Throw. Default button "B" will instantly and quickly throw any grenades the marine has purchased. 
+    - New Ability: Dedicated Grenade Throw (soon will become "quick throw"). Default button "B" will instantly deploy and throw any grenades the marine has purchased. 
         - Can rebind the button in menu options.
+        - Button can be held to hold the cooked grenade.
     - Grenades
         - Cluster
             - Now deals 5x damage vs. flammable structures, 2.5x vs. all other structures.
