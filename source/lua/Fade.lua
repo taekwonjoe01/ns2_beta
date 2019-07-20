@@ -68,7 +68,7 @@ local kShadowStepForce = 4
 local kShadowStepSpeed = 30
 
 local kMaxSpeed = 6.2
-local kBlinkMaxSpeed = 19
+local kBlinkMaxSpeed = 25
 local kBlinkSpeed = 17
 local kBlinkAcceleration = 40
 local kBlinkAddAcceleration = 1
@@ -347,7 +347,7 @@ function Fade:ModifyVelocity(input, velocity, deltaTime)
         end 
         
         -- additional acceleration when holding down blink to exceed max speed
-        --velocity:Add(wishDir * kBlinkAddAcceleration * deltaTime)
+        velocity:Add(wishDir * kBlinkAddAcceleration * deltaTime)
         
     end
 

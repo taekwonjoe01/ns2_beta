@@ -17,8 +17,10 @@ class 'Blink' (Ability)
 
 Blink.kMapName = "blink"
 
--- initial force added when starting blink
-local kEtherealForce = 17
+-- initial force added when starting blink. kEtherealForce + kEtherealBoost will be the minimum speed a Fade is set
+-- to when they first blink. Each successive time after, they have kEtherealBoost added.
+local kEtherealForce = 15
+local kEtherealBoost = 2
 local kEtherealVerticalForce = 2
 
 local networkVars =
@@ -132,11 +134,6 @@ function Blink:OnSecondaryAttackEnd(player)
     
 end
 
---[[
-    Blink:SetEthereal
-
-
---]]
 function Blink:SetEthereal(player, state)
 
     -- Enter or leave ethereal mode.
@@ -162,6 +159,9 @@ function Blink:SetEthereal(player, state)
             if player:GetIsOnGround() then
                 newVelocityVector.y = math.max(newVelocityVector.y, kEtherealVerticalForce)
             end
+
+            local speedBoost = playerForwardAxis * kEtherealBoost
+            newVelocityVector:Add(speedBoost)
 
             player:SetVelocity(newVelocityVector)
             player.onGround = false
