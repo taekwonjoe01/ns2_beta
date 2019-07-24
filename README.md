@@ -5,7 +5,12 @@ This mod contains various balance changes based on various ideas of the NS2 bala
 
 Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 
-## Latest Changes (Revision 2)
+## Latest Changes (Revision 2.1)
+- Marines
+    - Tweaked Shotgun:
+        - 7 pellet outer ring bullet caliber reduced from 150mm to 16mm
+
+## Revision 2
 
 - Fade
     - Blink's initial cast (when you first activate ability) will now cancel All velocity across all axis' (used to only cancel Up/Down velocity)
@@ -95,7 +100,7 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
         - Change the spread pattern to 13 (1/5/7) pellets total with variable calibers and damage values:
             - 1 pellet in the very center causing 20 dmg and a caliber of 16 mm
             - 5 pellets with a center offset of 0.5 (inner ring) dealing 16 dmg and and a caliber of 16 mm
-            - 7 pellets with a center offset of 1.5 (outer ring) dealing 10 dmg and and a caliber of 150 mm
+            - 7 pellets with a center offset of 1.5 (outer ring) dealing 10 dmg and and a caliber of 16 mm
     - Mines
         - Damage type changed to Normal (from Light)
         - Damage increased to 150 (from 125)
