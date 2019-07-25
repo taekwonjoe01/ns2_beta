@@ -118,7 +118,6 @@ function Mine:Detonate()
 end
 
 function Mine:Arm()
-    if not self.active then return end
 
     if not self.armed then
         
