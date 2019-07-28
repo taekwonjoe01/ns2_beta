@@ -9,8 +9,9 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 
 - Fade
     - Blink's initial cast (when you first activate ability) will now cancel All velocity across all axis' (used to only cancel Up/Down velocity)
-    - Blink initial cast speed set to 17 (up from ~15.6)
+    - Blink initial cast speed set to 16.25 (up from ~15.6)
     - Removed spurs reducing Air friction for fade. Originally this reduced 0.01 air friction per spur. Fade air friction is 0.17.
+    - Energy regen rate of adrenaline reduced from 80% to 30%
 
 - Lerk
     - New Ability: Roost. When a lerk is perched on a wall, they will heal 5HP per second.
@@ -61,8 +62,9 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
             - Research takes 30 seconds
     - Fade
         - Blink's initial cast (when you first activate ability) will now cancel All velocity across all axis' (used to only cancel Up/Down velocity)
-        - Blink initial cast speed set to 17 (up from ~15.6)
+        - Blink initial cast speed set to 16.25 (up from ~15.6)
         - Removed spurs reducing Air friction for fade. Originally this reduced 0.01 air friction per spur. Fade air friction is 0.17.
+        - Energy regen rate of adrenaline reduced from 80% to 30%
     - Onos
         - Decreased base health to 700 (from 900)
         - Increased biomass health bonus to 50 (from 30)
