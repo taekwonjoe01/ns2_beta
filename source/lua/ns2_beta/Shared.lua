@@ -1,4 +1,4 @@
-kBetaVersion = 3 -- 1 year month day versionofday
+kBetaVersion = 4 -- 1 year month day versionofday
 
 do
     if ModuleLoader then
