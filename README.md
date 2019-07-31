@@ -8,7 +8,7 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 ## Latest Changes (Revision 3)
 - Alien
     - The "Heal" sound is no longer played when aliens get another shell built.
-    - The Umbra shader no instantly removes when umbra expires instead of slowly trickling away.
+    - The Umbra shader now instantly removes when umbra expires instead of slowly trickling away.
     - Fade
         - Removed the auto-couching feature
         - Blink's initial cast (when you first activate ability) will now cancel All velocity across all axis' (used to only cancel Up/Down velocity)
